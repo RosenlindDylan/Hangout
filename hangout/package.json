@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "datetimepicker": "^0.1.39",
     "mongodb": "^4.8.1",
     "next": "latest",
     "react": "^18.2.0",
@@ -14,6 +15,7 @@
   "devDependencies": {
     "@types/node": "18.7.5",
     "@types/react": "16.9.17",
+    "@types/react-datepicker": "^4.15.0",
     "typescript": "4.6.3"
   }
 }
