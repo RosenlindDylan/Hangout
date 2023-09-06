@@ -92,11 +92,11 @@ export default function Home({
             <button type="submit">Submit</button>
           </form>
         
-          <DatePicker
+          {/* <DatePicker
             selected={date}
             onSelect={handleDateSelect} //when day is clicked
             onChange={handleDateChange} //only when value has changed
-          />
+          /> */}
 
 
       </main>
