@@ -56,6 +56,12 @@ export default function Home({
     e.preventDefault();
     console.log("form submitted with: " + name);
     setName('');
+
+    // database stuff here
+
+    
+
+
   }
 
   return (
@@ -81,7 +87,9 @@ export default function Home({
             <button type="submit">Submit</button>
           </form>
         
-        <DateComponent />
+        <div className={styles.calendarContainer}>
+          <DateComponent />
+        </div>
 
       </main>
 

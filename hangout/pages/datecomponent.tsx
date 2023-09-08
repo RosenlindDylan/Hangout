@@ -10,7 +10,6 @@ function DateComponent() {
     //  function to handle date selection
     const handleDateSelect = (selectedDate) => {
       console.log('Date selected:', selectedDate)
-      // database logic will go here as well
     };
   
     // function to handle date change
@@ -20,6 +19,10 @@ function DateComponent() {
 
     const handleSubmit = () => {
       console.log('Date submitted:', date)
+
+      // database logic will go here
+      
+
     };
 
 
