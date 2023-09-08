@@ -1,33 +1,44 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
+import styles from './datecomponent.module.css'
 import 'react-datepicker/dist/react-datepicker.css';
 
 
 function DateComponent() {
     const [date, setDate] = useState(new Date());
   
-    // Custom function to handle date selection (onSelect)
+    //  function to handle date selection
     const handleDateSelect = (selectedDate) => {
-      // This function is called when a day is clicked
-      console.log('Date selected:', selectedDate);
-      // You can perform additional actions here if needed
+      console.log('Date selected:', selectedDate)
+      // database logic will go here as well
     };
   
-    // Custom function to handle date change (onChange)
+    // function to handle date change
     const handleDateChange = (selectedDate) => {
-      // This function is called when the date value has changed
       setDate(selectedDate);
-      console.log('Date changed:', selectedDate);
-      // You can also perform additional actions here if needed
     };
-  
+
+    const handleSubmit = () => {
+      console.log('Date submitted:', date)
+    };
+
+
+      
     return (
-      <DatePicker
-        selected={date}
-        onSelect={handleDateSelect}
-        onChange={handleDateChange}
-        // You can add other props like minDate, maxDate, dateFormat, etc.
-      />
+      <div className={styles.calendar}>
+        <DatePicker
+          selected={date}
+          onSelect={handleDateSelect}
+          onChange={handleDateChange}
+          showTimeSelect
+          dateFormat="MMMM d, yyyy h:mm aa"
+          timeFormat="HH:mm"
+          timeIntervals={15}
+
+        />
+
+        <button onClick={handleSubmit}>Submit</button>
+      </div>
     );
   }
   
