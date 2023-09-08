@@ -3,8 +3,8 @@ import clientPromise from '../lib/mongodb'
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
 import styles from './index.module.css'
 import React, { useState, useEffect } from 'react'
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import DateComponent from './datecomponent'
 
 type ConnectionStatus = {
   isConnected: boolean
@@ -38,9 +38,10 @@ export const getServerSideProps: GetServerSideProps<
 export default function Home({
   isConnected,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  
+
   const [name, setName] = useState('');
-  const [date, setDate] = useState(new Date());
+  // const [date, setDate] = useState(currDate);
+  // const [startDate, setStartDate] = useState(currDate);
   
   // outside jsx conditional checks for db connection when home is rendered
   {isConnected ? (
@@ -56,18 +57,6 @@ export default function Home({
     console.log("form submitted with: " + name);
     setName('');
   }
-
-
-  // calendar stuff
-  const handleDateSelect = (selectedDate) => {
-    console.log('date selected is ', selectedDate);
-  }
-
-  const handleDateChange = (chagnedDate) => {
-    console.log('date changed to ' + chagnedDate);
-    setDate(chagnedDate);
-  }
-
 
   return (
     <div className={styles.container}>
@@ -92,12 +81,7 @@ export default function Home({
             <button type="submit">Submit</button>
           </form>
         
-          {/* <DatePicker
-            selected={date}
-            onSelect={handleDateSelect} //when day is clicked
-            onChange={handleDateChange} //only when value has changed
-          /> */}
-
+        <DateComponent />
 
       </main>
 
@@ -107,3 +91,4 @@ export default function Home({
     </div>
   )
 }
+
