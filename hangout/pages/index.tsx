@@ -3,16 +3,36 @@ import styles from './index.module.css'
 import React, { useState, useEffect } from 'react'
 import "react-datepicker/dist/react-datepicker.css";
 import DateComponent from './datecomponent'
-import { InferGetServerSidePropsType } from 'next';
-import { getServerSideProps } from '../db/db';
-import { getData, insertData }from '../db/dataAccess';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { getData, insertData } from './db/dataAccess';
+import clientPromise from '../lib/mongodb';
+
+type ConnectionStatus = {
+  isConnected: boolean
+}
+
+export const getServerSideProps: GetServerSideProps<
+  ConnectionStatus
+> = async () => {
+  try {
+    await clientPromise
+
+    return {
+      props: { isConnected: true },
+    }
+  } catch (e) {
+    console.error(e)
+    return {
+      props: { isConnected: false },
+    }
+  }
+}
 
 export default function Home({
   isConnected,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-
   const [name, setName] = useState('');
-  
+
   // checks for db connection when home is rendered
   {isConnected ? (
     console.log("successfully connected to db!")
@@ -26,6 +46,7 @@ export default function Home({
     console.log("form submitted with: " + name);
     setName('');
   }
+
 
   // maybe something like this?
   // const handleCalendarSubmit = (selectedDate) => {
