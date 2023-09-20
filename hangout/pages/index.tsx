@@ -2,43 +2,34 @@ import Head from 'next/head'
 import styles from './index.module.css'
 import React, { useState, useEffect } from 'react'
 import "react-datepicker/dist/react-datepicker.css";
-import DateComponent from './datecomponent'
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import { getData, insertData } from './db/dataAccess';
-import clientPromise from '../lib/mongodb';
+import DateComponent from '../components/datecomponent'
 
-type ConnectionStatus = {
-  isConnected: boolean
+
+type Props = {
+  posts: [Post]
 }
 
-export const getServerSideProps: GetServerSideProps<
-  ConnectionStatus
-> = async () => {
+type Post = {
+  _id: String;
+  title: String;
+  content: String;
+}
+
+export async function getServerSideProps() {
   try {
-    await clientPromise
+    let response = await fetch('http://localhost:3000/api/getPosts');
+    let posts = await response.json();
 
     return {
-      props: { isConnected: true },
-    }
+      props: { posts: JSON.parse(JSON.stringify(posts)) },
+    };
   } catch (e) {
-    console.error(e)
-    return {
-      props: { isConnected: false },
-    }
+    console.error(e);
   }
 }
 
-export default function Home({
-  isConnected,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function Home() {
   const [name, setName] = useState('');
-
-  // checks for db connection when home is rendered
-  {isConnected ? (
-    console.log("successfully connected to db!")
-  ) : (
-    console.log("not connected to db!")
-  )}
    
   // name field
   const handleNameSubmit = (e) => {
@@ -47,23 +38,13 @@ export default function Home({
     setName('');
   }
 
-
-  // maybe something like this?
-  // const handleCalendarSubmit = (selectedDate) => {
-  //   const data = {
-  //     name: name,
-  //     datetime: selectedDate, // Pass the selected date
-  //   };
-  //   handleDBInsert(data);
-  // };
-
-  // inserts name, datetime into hangout
-  const handleDBInsert = (date) => {
-    let query = { name : name, 
-      date : date
-    }
-    insertData(query)
-  }
+ // inserts name, datetime into hangout
+ const handleDBInsert = (date) => {
+   let query = { name : name, 
+     date : date
+   }
+   insertData(query)
+  } 
 
   return (
     <div className={styles.container}>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import styles from './datecomponent.module.css'
 import 'react-datepicker/dist/react-datepicker.css';
-import handleDBInsert from './index'
+import handleDBInsert from '../pages/index'
 
 function DateComponent() {
     const [date, setDate] = useState(new Date());
