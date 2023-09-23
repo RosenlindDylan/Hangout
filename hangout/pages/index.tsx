@@ -15,36 +15,31 @@ type Post = {
   content: String;
 }
 
-export async function getServerSideProps() {
-  try {
-    let response = await fetch('http://localhost:3000/api/getPosts');
-    let posts = await response.json();
+// export async function getServerSideProps() {
+//   try {
+//     let response = await fetch('http://localhost:3000/api/getPosts');
+//     let posts = await response.json();
 
-    return {
-      props: { posts: JSON.parse(JSON.stringify(posts)) },
-    };
-  } catch (e) {
-    console.error(e);
-  }
-}
+//     return {
+//       props: { posts: JSON.parse(JSON.stringify(posts)) },
+//     };
+//   } catch (e) {
+//     console.error(e);
+//   }
+// }
+
+
 
 export default function Home() {
   const [name, setName] = useState('');
-   
-  // name field
-  const handleNameSubmit = (e) => {
-    e.preventDefault();
-    console.log("form submitted with: " + name);
-    setName('');
-  }
 
- // inserts name, datetime into hangout
- const handleDBInsert = (date) => {
-   let query = { name : name, 
-     date : date
-   }
-   insertData(query)
-  } 
+//  // inserts name, datetime into hangout
+//  const handleDBInsert = (date) => {
+//    let query = { name : name, 
+//      date : date
+//    }
+//    insertData(query)
+//   } 
 
   return (
     <div className={styles.container}>
@@ -56,7 +51,7 @@ export default function Home() {
         <h1 className={styles.title}>
           Welcome to Hangout!
         </h1>
-          <form className={styles.nameForm} onSubmit={handleNameSubmit}>
+          <form className={styles.nameForm}>
             <div>
               <label>Name: </label>
               
@@ -66,11 +61,14 @@ export default function Home() {
                 onChange={(e) => setName(e.target.value)}
               />
             </div>
-            <button type="submit">Submit</button>
           </form>
         
         <div className={styles.calendarContainer}>
           <DateComponent />
+        </div>
+
+        <div className={styles.cardsBody}>
+          <h1>Previous suggestions: </h1>
         </div>
 
       </main>
