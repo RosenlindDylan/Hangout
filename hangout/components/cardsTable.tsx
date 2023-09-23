@@ -31,7 +31,7 @@ export default function CardsTable() {
         </thead>
         <tbody>
             {card.map((card) => (
-                <tr key={card._id}>
+                <tr>
                     <td>{card.name}</td>
                     <td>{card.date}</td>
                 </tr>
