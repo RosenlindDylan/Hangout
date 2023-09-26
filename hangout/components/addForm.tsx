@@ -1,13 +1,12 @@
 import { useState } from 'react'
 import DateComponent from './datecomponent'
+import styles from './addForm.module.css'
 // import { useNavigate } from 'react-router';
 
 
 /*
 TO DO ON THIS PAGE:
 
-parser for datetime - not inserting correctly
-css for component
 fix react router / set up
 
 */
@@ -19,14 +18,25 @@ export default function addForm() {
     })
     // const navigate = useNavigate();
 
-    function updateForm(value) {
+    function updateName(value) {
         return setForm((prev) => {
           return { ...prev, name : value };
         });
     }
 
+    function updateDate(selectedDate) {
+      const dateStr = selectedDate.toString().slice(0, 25);
+      setForm((prev) => {
+        return { ...prev, date: dateStr };
+      });
+    }
+
     //db
     async function onSubmit(e) {
+        if (form.date.length == 0) {
+          console.log('date failed to upload')
+        }
+
         e.preventDefault();
         const newForm = { ...form };
         
@@ -49,17 +59,19 @@ export default function addForm() {
 
     // gonna have to redo the css later too
     return (
-        <div>
+      <div className={styles.container}>
+        <div className={styles.addForm}>
             <form>
                 <label>Name: </label>
                 <input
                 type="text"
                 value={form.name} 
-                onChange={(e) => updateForm(e.target.value)}
+                onChange={(e) => updateName(e.target.value)}
                 />
             </form>
-            <DateComponent />
+            <DateComponent onDateChange={updateDate} />
             <button onClick={onSubmit}>Submit</button>
         </div>
+      </div>
     )
 }
