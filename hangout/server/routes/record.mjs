@@ -58,4 +58,16 @@ router.delete("/:id", async (req, res) => {
   res.send(result).status(200);
 });
 
+// delete all
+router.delete("/deleteAll", async (req, res) => {
+  const collection = db.collection("hangout");
+  
+  try {
+    const result = await collection.deleteMany({});
+    res.status(200).send(result);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
 export default router;
