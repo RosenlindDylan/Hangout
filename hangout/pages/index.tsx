@@ -3,6 +3,7 @@ import styles from './index.module.css'
 import React, { useState, useEffect } from 'react'
 import "react-datepicker/dist/react-datepicker.css";
 import AddForm from '../components/addForm';
+import CardList from '../components/cardList';
 
 
 export default function Home() {
@@ -22,6 +23,7 @@ export default function Home() {
 
         <div className={styles.cardsBody}>
           <h1>Previous suggestions: </h1>
+          <CardList />
         </div>
 
       </main>

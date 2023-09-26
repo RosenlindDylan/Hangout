@@ -3,7 +3,7 @@ import DatePicker from 'react-datepicker';
 import styles from './datecomponent.module.css'
 import 'react-datepicker/dist/react-datepicker.css';
 
-function DateComponent() {
+function DateComponent( { onDateChange }) {
     const [date, setDate] = useState(new Date());
   
     //  function to handle date selection
@@ -14,6 +14,8 @@ function DateComponent() {
     // function to handle date change
     const handleDateChange = (selectedDate) => {
       setDate(selectedDate);
+      // Call the provided callback to update the date in the parent component
+      onDateChange(selectedDate);
     };
       
     return (
@@ -22,7 +24,7 @@ function DateComponent() {
           selected={date}
           onChange={handleDateChange}
           showTimeSelect
-          dateFormat="MMMM d, yyyy h:mm aa"
+          dateFormat="MMMM d, yyyy h:mm"
           timeFormat="HH:mm"
           timeIntervals={15}
         />
