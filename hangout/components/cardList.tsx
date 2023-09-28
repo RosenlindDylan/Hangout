@@ -1,11 +1,21 @@
 import { useState, useEffect } from 'react'
 import styles from './cardList.module.css'
 
+
 // function to populate card as a row
 const Card = (props) => (
     <tr>
       <td>{props.record.name}</td>
       <td>{props.record.date}</td>
+      <td>
+        <button className="btn btn-link"
+          onClick={() => {
+            props.deleteRecord(props.record._id);
+          }}
+          >
+          Delete
+        </button>
+      </td>
     </tr>
 );
 
@@ -32,6 +42,16 @@ export default function CardList() {
         getRecords();
     }, []);
 
+
+    async function deleteRecord(id) {
+      await fetch(`http://localhost:5050/record/${id}`, {
+        method: "DELETE"
+      });
+    
+      const newRecords = records.filter((el) => el._id !== id);
+      setRecords(newRecords);
+    }
+
     function recordList() {    
         if (records.length === 0) {
           // Display a message when there are no records
@@ -45,6 +65,8 @@ export default function CardList() {
                 return (
                   <Card
                       record={record}
+                      deleteRecord={() => deleteRecord(record._id)}
+                      key={record._id}
                   />
                 );
               });
