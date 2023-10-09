@@ -1,6 +1,12 @@
 import { useState, useEffect } from 'react'
 import styles from './cardList.module.css'
 
+interface Record {
+  _id: string; // Define the type for _id property
+  name: string;
+  date: string;
+}
+
 
 // function to populate card as a row
 const Card = (props) => (
@@ -20,7 +26,7 @@ const Card = (props) => (
 );
 
 export default function CardList() {
-    const [records, setRecords] = useState([]);
+    const [records, setRecords] = useState<Record[]>([]);
 
     // gets cards from db
     useEffect(() => {
