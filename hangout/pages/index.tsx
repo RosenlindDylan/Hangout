@@ -9,28 +9,30 @@ import CardList from '../components/cardList';
 export default function Home() {
 
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Hangout</title>
-      </Head>
+    <div className={styles.root}>
+      <div className={styles.container}>
+        <Head>
+          <title>Hangout</title>
+        </Head>
 
-      <main>
-        <h1 className={styles.title}>
-          Welcome to Hangout!
-        </h1>
+        <main>
+          <h1 className={styles.title}>
+            Welcome to Hangout!
+          </h1>
 
-        <AddForm />
+          <AddForm />
 
-        <div className={styles.cardsBody}>
-          <h1>Previous suggestions: </h1>
-          <CardList />
-        </div>
+          <div className={styles.cardsBody}>
+            <h1>Previous suggestions: </h1>
+            <CardList />
+          </div>
 
-      </main>
+        </main>
 
-      <footer className={styles.footer}>
-        <a href='https://rosenlinddylan.github.io/'>About me</a>
-      </footer>
+        <footer className={styles.footer}>
+          <a href='https://rosenlinddylan.github.io/'>About me</a>
+        </footer>
+      </div>
     </div>
   )
 }
