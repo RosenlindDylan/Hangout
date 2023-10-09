@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import styles from './cardList.module.css'
 
 interface Record {
-  _id: string; // Define the type for _id property
+  _id: string;
   name: string;
   date: string;
 }
@@ -50,6 +50,11 @@ export default function CardList() {
 
 
     async function deleteRecord(id) {
+      interface records {
+        _id: string;
+        name: string;
+        date: string;
+      }
       await fetch(`http://localhost:5050/record/${id}`, {
         method: "DELETE"
       });
@@ -59,6 +64,11 @@ export default function CardList() {
     }
 
     function recordList() {    
+        interface Record {
+          _id: string;
+          name: string;
+          date: string;
+        }
         if (records.length === 0) {
           // Display a message when there are no records
           return (
